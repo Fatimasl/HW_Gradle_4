@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -27,7 +28,7 @@ public class TestAppCardDelivery {
 
         //начало блок установки даты
         LocalDate varDate = LocalDate.now();
-        varDate = varDate.plusDays(7);
+        varDate = varDate.plusDays(2);
         String stringDate = varDate.format(DateTimeFormatter.ofPattern("dd.MM.uuuu"));
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id='date'] input").setValue(stringDate);
@@ -39,11 +40,8 @@ public class TestAppCardDelivery {
         $(".grid-row button").click();
 
 
-        WebElement el2 = $("[data-test-id='notification'] .notification__title");
-        ((SelenideElement) el2).shouldBe(visible, Duration.ofSeconds(15));
-        String actual = el2.getText().trim();
-        assertEquals("Успешно!", actual);
-
-        Thread.sleep(20000);
+        SelenideElement el2 = $("[data-test-id='notification'] .notification__content");
+        el2.shouldBe(visible, Duration.ofSeconds(15));
+        el2.shouldHave(exactText("Встреча успешно забронирована на "+stringDate));
     }
 }
