@@ -28,7 +28,7 @@ public class TestAppCardDelivery {
 
         //начало блок установки даты
         LocalDate varDate = LocalDate.now();
-        varDate = varDate.plusDays(2);
+        varDate = varDate.plusDays(7);
         String stringDate = varDate.format(DateTimeFormatter.ofPattern("dd.MM.uuuu"));
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id='date'] input").setValue(stringDate);
