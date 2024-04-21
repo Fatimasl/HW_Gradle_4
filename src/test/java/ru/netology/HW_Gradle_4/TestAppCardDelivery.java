@@ -21,7 +21,7 @@ public class TestAppCardDelivery {
     private WebDriver driver;
 
     @Test
-    public void SuccessfulForm() throws InterruptedException {
+    public void SuccessfulForm() {
         open("http://localhost:9999/");
 
         $("[data-test-id='city'] input").setValue("Челябинск");
